@@ -122,10 +122,10 @@
     <comment>1 for firefox and 2 for Chrome</comment>
   </data>
   <data name="ExcelPath" xml:space="preserve">
-    <value>C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\ExcelData</value>
+    <value>C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\ExcelData\ShareSkill.xlsx</value>
   </data>
   <data name="Filepath" xml:space="preserve">
-    <value>C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\WorkSample</value>
+    <value>C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\FileUpload.au3</value>
   </data>
   <data name="IsLogin" xml:space="preserve">
     <value>true</value>

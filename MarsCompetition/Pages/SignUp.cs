@@ -55,7 +55,7 @@ namespace MarsCompetition.Pages
         internal void register()
         {
             //Populate the excel data
-            GlobalDefinations.ExcelLib.PopulateInCollection(Base.ExcelPath, "SignUp");
+            GlobalDefinations.ExcelLib.PopulateInCollection(Base.ExcelPath , "SignUp");
             //Click on Join button
             Join.Click();
 

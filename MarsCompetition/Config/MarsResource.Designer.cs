@@ -70,7 +70,7 @@ namespace MarsCompetition.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\ExcelData.
+        ///   Looks up a localized string similar to C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\ExcelData\ShareSkill.xlsx.
         /// </summary>
         public static string ExcelPath {
             get {
@@ -79,7 +79,7 @@ namespace MarsCompetition.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\WorkSample.
+        ///   Looks up a localized string similar to C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\FileUpload.au3.
         /// </summary>
         public static string Filepath {
             get {

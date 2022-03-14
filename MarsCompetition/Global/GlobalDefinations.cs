@@ -6,9 +6,12 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using ExcelDataReader;
 using SeleniumExtras.WaitHelpers;
 using DocumentFormat.OpenXml.Spreadsheet;
+using System.Text.Encodings;
+using ExcelDataReader;
+using Excel;
+
 
 #nullable disable
 
@@ -39,75 +42,37 @@ namespace MarsCompetition.Global
         #region Excel 
         public class ExcelLib
         {
-            static List<Datacollection> dataCol = new List<Datacollection>();
-
-            public class Datacollection
-            {
-                public int rowNumber { get; set; }
-                public string colName { get; set; }
-                public string colValue { get; set; }
-            }
-
-
-            public static void ClearData()
-            {
-                dataCol.Clear();
-            }
-
 
             private static DataTable ExcelToDataTable(string fileName, string SheetName)
             {
                 // Open file and return as Stream
-                using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
+                using (System.IO.FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
                 {
-                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    using (IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream))
                     {
+                        excelReader.IsFirstRowAsColumnNames = true;
 
-                        var result = reader.AsDataSet(new ExcelDataSetConfiguration()
-                        {
-                            ConfigureDataTable = (data) => new ExcelDataTableConfiguration()
-                            {
-                                UseHeaderRow = true
-                            }
-                        });
+                        //Return as dataset
+                        DataSet result = excelReader.AsDataSet();
                         //Get all the tables
-                        var table = result.Tables;
+                        DataTableCollection table = result.Tables;
 
                         // store it in data table
                         DataTable resultTable = table[SheetName];
+
+                        //excelReader.Dispose();
+                        //excelReader.Close();
+                        // return
                         return resultTable;
                     }
                 }
             }
 
-            public static string ReadData(int rowNumber, string columnName)
-            {
-                try
-                {
-                    //Retriving Data using LINQ to reduce much of iterations
-
-                    rowNumber = rowNumber - 1;
-                    string data = (from colData in dataCol
-                                   where colData.colName == columnName && colData.rowNumber == rowNumber
-                                   select colData.colValue).SingleOrDefault();
-
-                    //var datas = dataCol.Where(x => x.colName == columnName && x.rowNumber == rowNumber).SingleOrDefault().colValue;
-
-
-                    return data.ToString();
-                }
-
-                catch (Exception e)
-                {
-                    //Added by Kumar
-                    Console.WriteLine("Exception occurred in ExcelLib Class ReadData Method!" + Environment.NewLine + e.Message.ToString());
-                    return null;
-                }
-            }
+            static List<Datacollection> dataCol = new List<Datacollection>();
 
             public static void PopulateInCollection(string fileName, string SheetName)
             {
-                ExcelLib.ClearData();
+                //ExcelLib.ClearData();
                 DataTable table = ExcelToDataTable(fileName, SheetName);
 
                 //Iterate through the rows and columns of the Table
@@ -130,10 +95,41 @@ namespace MarsCompetition.Global
                 }
 
             }
+            public static string ReadData(int rowNumber, string columnName)
+            {
+                try
+                {
+                    //Retriving Data using LINQ to reduce much of iterations
+
+                    rowNumber = rowNumber - 1;
+                    string data = (from colData in dataCol
+                                   where colData.colName == columnName && colData.rowNumber == rowNumber
+                                   select colData.colValue).FirstOrDefault();
+
+                    var datas = dataCol.Where(x => x.colName == columnName && x.rowNumber == rowNumber).SingleOrDefault().colValue;
+
+
+                    return data.ToString();
+                }
+
+                catch (Exception e)
+                {
+                    //Added by Kumar
+                    Console.WriteLine("Exception occurred in ExcelLib Class ReadData Method!" + Environment.NewLine + e.Message.ToString());
+                    return null;
+                }
+            }
 
         }
 
+        public class Datacollection
+        {
+            public int rowNumber { get; set; }
+            public string colName { get; set; }
+            public string colValue { get; set; }
+        }
         #endregion
+
 
         #region screenshots
         public class SaveScreenShotClass
@@ -158,7 +154,10 @@ namespace MarsCompetition.Global
                 return fileName.ToString();
             }
         }
+
         #endregion
     }
-
 }
+
+
+

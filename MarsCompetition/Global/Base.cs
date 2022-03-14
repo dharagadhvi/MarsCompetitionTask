@@ -45,50 +45,52 @@ namespace MarsCompetition.Global
                     GlobalDefinations.driver = new ChromeDriver();
                     GlobalDefinations.driver.Manage().Window.Maximize();
                     break;
-            
+
+
+            }
+            #region Initialise Reports
+
+            extent = new ExtentReports(ReportPath, false, DisplayOrder.NewestFirst);
+            extent.LoadConfig(MarsResource.ReportXMLPath);
+
+            #endregion
 
 
 
-                    #region Initialise Reports
-
-                    extent = new ExtentReports(ReportPath, false, DisplayOrder.NewestFirst);
-                    extent.LoadConfig(MarsResource.ReportXMLPath);
-
-                    #endregion
-
-                    if (MarsResource.IsLogin == "true")
+            if (MarsResource.IsLogin == "true")
                     {
                         SignIn loginobj = new SignIn();
                         loginobj.LoginSteps();
                     }
                     else
                     {
-                        SignUp obj = new SignUp();
-                        obj.register();
+                       SignUp obj = new SignUp();
+                       obj.register();
                     }
 
-            }
+
+
         }
-            //[TearDown]
-            //public void TearDown()
-            //{
-            //    // Screenshot
-            //    String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinations.driver, "Report");//AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
-            //    test = new ExtentTest("", "");
-            //    test.Log(LogStatus.Info, "Image example: " + img);
-            //    // end test. (Reports)
-            //    //extent.EndTest(test);
-            //    // calling Flush writes everything to the log file (Reports)
-            //    extent.Flush();
-            //    // Close the driver :)
+        [TearDown]
+        public void TearDown()
+        {
+            // Screenshot
+            String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinations.driver, "Report");//AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
+            test = new ExtentTest("", "");
+            test.Log(LogStatus.Info, "Image example: " + img);
+            // end test. (Reports)
+            //extent.EndTest(test);
+            // calling Flush writes everything to the log file (Reports)
+            extent.Flush();
+            // Close the driver :)
 
-            //    GlobalDefinations.driver.Close();
-            //    GlobalDefinations.driver.Quit();
-            //}
-            #endregion
+            GlobalDefinations.driver.Close();
+            GlobalDefinations.driver.Quit();
+        }
+        #endregion
 
 
-        
+
     }
 }
 

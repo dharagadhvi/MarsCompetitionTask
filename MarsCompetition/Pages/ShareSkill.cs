@@ -73,7 +73,8 @@ namespace MarsCompetition.Pages
             private IWebElement EndTimeDropDown { get; set; }
 
             //Click on Upload
-            [FindsBy(How = How.XPath, Using = "//*[@id='service - listing - Section']/div[2]/div/form/div[9]/div/div[2]/section/div/label/div/span/i")]
+            [FindsBy(How = How.XPath, Using = "//*[@id='service - listing - section']/div[2]/div/form/div[9]/div/div[2]/section/div/label/div/span/i")]
+                                               
             private IWebElement WorkSample { get; set; }
 
 
@@ -105,40 +106,49 @@ namespace MarsCompetition.Pages
 
         public  void EnterShareSkill()
             {
+            Thread.Sleep(4000);
 
             //click shareskill button
             ShareSkillButton.Click();
 
-            //GlobalDefinations.ExcelLib.PopulateInCollection(base.ExcelPath, "ShareSkill");
+            GlobalDefinations.ExcelLib.PopulateInCollection(Base.ExcelPath, "ShareSkill");
             //Enter the Title and Description
+            Thread.Sleep(2000);
 
             Title.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "Title"));
             Description.SendKeys(GlobalDefinations.ExcelLib.ReadData(2,"Description"));
+            Thread.Sleep(4000);
             
             //selct Category
-            CategoryDropDown.Click();
-            SelectElement categorySelect = new SelectElement(CategoryDropDown);
-            categorySelect.SelectByText(GlobalDefinations.ExcelLib.ReadData(2, "Catagory"));
+            //CategoryDropDown.Click();
+            //SelectElement categorySelect = new SelectElement(CategoryDropDown);
+            //categorySelect.SelectByText(GlobalDefinations.ExcelLib.ReadData(2, "Catagory"));
+            //Thread.Sleep(4000);
 
-            //selct Suncategory
-            SubCategoryDropDown.Click();
-            SelectElement subCategorySelect = new SelectElement(SubCategoryDropDown);
-            subCategorySelect.SelectByText(GlobalDefinations.ExcelLib.ReadData(2 ,"SubCategory"));
-
+            ////selct Suncategory
+            //SubCategoryDropDown.Click();
+            //SelectElement subCategorySelect = new SelectElement(SubCategoryDropDown);
+            //Thread.Sleep(2000);
+            //subCategorySelect.SelectByText(GlobalDefinations.ExcelLib.ReadData(2 ,"SubCategory"));
+            //Thread.Sleep(2000);
             //Enter Tag
             Tags.Click();
-            Tags.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "tags"));
+            Thread.Sleep(2000);
+            Tags.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "Tags"));
             Tags.SendKeys(Keys.Enter);
+            Thread.Sleep(3000);
 
             //Select ServiceType
             ServiceTypeOptions.Click();
+            Thread.Sleep(1000);
               
             //Select Loaction Type
             LocationTypeOption.Click();
+            Thread.Sleep(1000);
 
             //Enter Available days
-            StartDateDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "StartDate"));
-            EndDateDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData (2,"EndDate"));
+            //StartDateDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "StartDate"));
+            //EndDateDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData (2,"EndDate"));
 
             //Select Day
             string day = GlobalDefinations.ExcelLib.ReadData(2, "Selectday");
@@ -148,15 +158,16 @@ namespace MarsCompetition.Pages
             }
 
             //StartTime and End time for sunday
-            StartTimeDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "Starttime"));
-            EndTimeDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "Endtime"));
+            //StartTimeDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "Starttime"));
+            //EndTimeDropDown.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "Endtime"));
 
             //SkillTradeOption.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Skill-Exchange"));
+            Thread.Sleep(2000);
             SkillExchange.SendKeys(GlobalDefinations.ExcelLib.ReadData(2, "Skill-Exchange"));
             SkillExchange.SendKeys(Keys.Enter);
 
             //WorkSample Upload
-            
+            Thread.Sleep(2000);
             WorkSample.Click();
             AutoItX3 autoIt = new AutoItX3();
             autoIt.WinActivate("Open");
