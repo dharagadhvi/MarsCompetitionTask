@@ -1,0 +1,6 @@
+﻿Sleep(400)
+ControlFocus("Open","","Edit")
+Sleep(400)
+ControlSetText("Open","","Edit1","C:\Users\dhara\Desktop\dhara photo.jpg")
+Sleep(400)
+ControlClick("Open","","Button1")

@@ -79,7 +79,7 @@ namespace MarsCompetition.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Industry Connect\Projects\SkillShare and Manage Listing\MarsCompetitionTask\MarsCompetition\FileUpload.au3.
+        ///   Looks up a localized string similar to C:\Users\dhara\Desktop\Jira-vs-Confluence (1).jpg.
         /// </summary>
         public static string Filepath {
             get {
